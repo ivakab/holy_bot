@@ -3,8 +3,8 @@ const TelegramBot = require("node-telegram-bot-api");
 const express = require("express");
 const cors = require("cors");
 
-const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
-// const webAppUrl = "https://6753-87-116-133-109.ngrok-free.app";
+// const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
+const webAppUrl = "https://fd40-87-116-133-109.ngrok-free.app";
 
 const bot = new TelegramBot(process.env.BOT_API_TOKEN, { polling: true });
 const app = express();
@@ -33,13 +33,19 @@ app.post("/web-data", async (req, res) => {
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: `Info  ${sum}, ${info
-          .map((item) => item.title)
-          .join(", ")}`,
+        message_text: `Info  ${sum}, ${info[0]}`,
       },
     });
     return res.status(200).json({});
   } catch (e) {
+    await bot.answerWebAppQuery(queryId, {
+      type: "article",
+      id: queryId,
+      title: "Failed",
+      input_message_content: {
+        message_text: `Failed`,
+      },
+    });
     return res.status(500).json({});
   }
 });
