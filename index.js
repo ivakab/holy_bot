@@ -3,7 +3,8 @@ const TelegramBot = require("node-telegram-bot-api");
 const express = require("express");
 const cors = require("cors");
 
-const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
+// const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
+const webAppUrl = "https://6753-87-116-133-109.ngrok-free.app";
 
 const bot = new TelegramBot(process.env.BOT_API_TOKEN, { polling: true });
 const app = express();
@@ -16,47 +17,23 @@ bot.on("message", async (msg) => {
   const text = msg.text;
 
   if (text === "/start") {
-    await bot.sendMessage(chatId, "Fill form below", {
+    await bot.sendMessage(chatId, "You can use this app for orders", {
       reply_markup: {
-        keyboard: [
-          [{ text: "Fill form", web_app: { url: webAppUrl + "/form" } }],
-        ],
+        inline_keyboard: [[{ text: "Open", web_app: { url: webAppUrl } }]],
       },
     });
-
-    await bot.sendMessage(chatId, "Let`s go", {
-      reply_markup: {
-        inline_keyboard: [[{ text: "Add order", web_app: { url: webAppUrl } }]],
-      },
-    });
-  }
-
-  if (msg?.web_app_data?.data) {
-    try {
-      const data = JSON.parse(msg?.web_app_data?.data);
-
-      await bot.sendMessage(chatId, "Good");
-      await bot.sendMessage(chatId, "Your country: " + data?.country);
-      await bot.sendMessage(chatId, "Your street: " + data?.street);
-
-      setTimeout(async () => {
-        await bot.sendMessage(chatId, "Here");
-      }, 3000);
-    } catch (e) {
-      console.log(e);
-    }
   }
 });
 
 app.post("/web-data", async (req, res) => {
-  const { queryId, products = [], totalPrice } = req.body;
+  const { queryId, info = [], sum } = req.body;
   try {
     await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: ` Summ  ${totalPrice}, ${products
+        message_text: `Info  ${sum}, ${info
           .map((item) => item.title)
           .join(", ")}`,
       },
