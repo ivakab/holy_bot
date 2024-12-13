@@ -36,7 +36,7 @@ app.post("/web-data", async (req, res) => {
         message_text: `Info  ${sum}, ${info[0]}`,
       },
     });
-    return res.status(200).json({});
+    return res.status(200).json({ message: "Request processed successfully" });
   } catch (e) {
     await bot.answerWebAppQuery(queryId, {
       type: "article",
@@ -46,7 +46,7 @@ app.post("/web-data", async (req, res) => {
         message_text: `Failed`,
       },
     });
-    return res.status(500).json({});
+    return res.status(500).json({ message: "Request failed" });
   }
 });
 
