@@ -4,7 +4,8 @@ const express = require("express");
 const cors = require("cors");
 
 const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
-// const webAppUrl = "https://fd40-87-116-133-109.ngrok-free.app";
+// const webAppUrl = "https://3efc-87-116-133-109.ngrok-free.app";
+const PORT = 8000;
 
 const bot = new TelegramBot(process.env.BOT_API_TOKEN, { polling: true });
 const app = express();
@@ -49,8 +50,6 @@ app.post("/web-data", async (req, res) => {
     return res.status(500).json({ message: "Request failed" });
   }
 });
-
-const PORT = 8000;
 
 app.listen(PORT, "0.0.0.0", () =>
   console.log("server started on PORT " + PORT)
