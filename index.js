@@ -26,7 +26,7 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.post("/web-data", async (req, res) => {
+app.post("/api/web-data", async (req, res) => {
   const { queryId, info = [], sum } = req.body;
   try {
     await bot.answerWebAppQuery(queryId, {
