@@ -3,7 +3,8 @@ const TelegramBot = require("node-telegram-bot-api");
 const express = require("express");
 const cors = require("cors");
 
-const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
+const webAppUrl = "https://holycakes.shop";
+// const webAppUrl = "https://timely-klepon-13b89e.netlify.app";
 const PORT = 8000;
 
 const bot = new TelegramBot(process.env.BOT_API_TOKEN, { polling: true });
