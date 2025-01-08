@@ -28,13 +28,22 @@ bot.on("message", async (msg) => {
 
 app.post("/api/web-data", async (req, res) => {
   const { queryId, products } = req.body;
+  const productList = products
+    .map(
+      (product, index) =>
+        `${index + 1}. Product: ${product.productKey}, Date: ${product.date}`
+    )
+    .join("\n");
+
+  const messageText = `Your order:\n${productList}`;
+
   try {
     await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: `Your order: ${products}`,
+        message_text: messageText,
       },
     });
     return res.status(200).json({ message: "Request processed successfully" });
