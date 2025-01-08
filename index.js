@@ -27,14 +27,14 @@ bot.on("message", async (msg) => {
 });
 
 app.post("/api/web-data", async (req, res) => {
-  const { queryId, info = [], sum } = req.body;
+  const { queryId, products } = req.body;
   try {
     await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: `Info  ${sum}, ${info[0]}`,
+        message_text: `Your order: ${products}`,
       },
     });
     return res.status(200).json({ message: "Request processed successfully" });
