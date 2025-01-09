@@ -28,7 +28,7 @@ bot.on("message", async (msg) => {
 
 app.post("/api/web-data", async (req, res) => {
   const { queryId, products, user } = req.body;
-  const username = user.username;
+  const username = user?.username;
   // const userId = user.id;
   const adminMessageText = `New order from @${username}:\n${productList}`;
 
