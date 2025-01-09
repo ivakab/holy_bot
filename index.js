@@ -43,7 +43,7 @@ app.post("/api/web-data", async (req, res) => {
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: messageText,
+        message_text: `messageText from ${user}`,
       },
     });
     await bot.sendMessage(
