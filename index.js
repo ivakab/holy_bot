@@ -27,7 +27,7 @@ bot.on("message", async (msg) => {
 });
 
 app.post("/api/web-data", async (req, res) => {
-  const { queryId, products } = req.body;
+  const { queryId, products, user } = req.body;
   const productList = products
     .map(
       (product, index) =>
@@ -46,6 +46,11 @@ app.post("/api/web-data", async (req, res) => {
         message_text: messageText,
       },
     });
+    await bot.sendMessage(
+      242766311,
+      `New order received:\n${messageText} from ${user}`
+    );
+
     return res.status(200).json({ message: "Request processed successfully" });
   } catch (e) {
     await bot.answerWebAppQuery(queryId, {
