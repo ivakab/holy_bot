@@ -43,13 +43,13 @@ app.post("/api/web-data", async (req, res) => {
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: `messageText from ${user}`,
+        message_text: `messageText from ${queryId}`,
       },
     });
-    await bot.sendMessage(
-      242766311,
-      `New order received:\n${messageText} from ${user}`
-    );
+    // await bot.sendMessage(
+    //   242766311,
+    //   `New order received:\n${messageText} from ${user}`
+    // );
 
     return res.status(200).json({ message: "Request processed successfully" });
   } catch (e) {
