@@ -37,8 +37,8 @@ app.post("/api/web-data", async (req, res) => {
     )
     .join("\n");
 
-  const messageText = `Your order:\n${productList}`;
-  const adminMessageText = `New order from @${username}:\n${productList}`;
+  const messageText = `Your order:\n${productList} ${user}`;
+  const adminMessageText = `New order from @${user}:\n${productList}`;
 
   try {
     await bot.answerWebAppQuery(queryId, {
