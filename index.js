@@ -37,7 +37,7 @@ app.post("/api/web-data", async (req, res) => {
     )
     .join("\n");
 
-  const messageForCustomer = `Your order:\n${productList}. Check your username: ${username}`;
+  const messageForCustomer = `Your order:\n${productList}.\nCheck your username: ${username}`;
   const messageForAdmin = `New order from @${username}:\n${productList}`;
 
   try {
