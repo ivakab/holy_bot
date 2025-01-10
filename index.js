@@ -37,8 +37,8 @@ app.post("/api/web-data", async (req, res) => {
     )
     .join("\n");
 
-  const messageText = `Your order:\n${productList} ${username}`;
-  const adminMessageText = `New order from @${username}:\n${productList}`;
+  const messageForCustomer = `Your order:\n${productList}. Check your username: ${username}`;
+  const messageForAdmin = `New order from @${username}:\n${productList}`;
 
   try {
     await bot.answerWebAppQuery(queryId, {
@@ -46,10 +46,10 @@ app.post("/api/web-data", async (req, res) => {
       id: queryId,
       title: "Successful",
       input_message_content: {
-        message_text: messageText,
+        message_text: messageForCustomer,
       },
     });
-    await bot.sendMessage(242766311, adminMessageText);
+    await bot.sendMessage(242766311, messageForAdmin);
 
     return res.status(200).json({ message: "Request processed successfully" });
   } catch (e) {
